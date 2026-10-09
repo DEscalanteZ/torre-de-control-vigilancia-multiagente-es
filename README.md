@@ -10,7 +10,7 @@ aparece algo programado que nadie ha apuntado. Solo Python 3 (probado en 3.9, 3.
 
 > **Versión 0.1.** Funciona y está probado (ver [Cómo se ha probado](#cómo-se-ha-probado)), pero es joven. Si encuentras un fallo, o una frase que no se sostiene, **abre un aviso (issue)**.
 
-> 🇬🇧 **[English summary → README.en.md](README.en.md)**
+> 🇬🇧 **[English version → README.en.md](README.en.md)**
 
 ```bash
 git clone https://github.com/DEscalanteZ/torre-de-control-vigilancia-multiagente-es
