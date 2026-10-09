@@ -1,8 +1,8 @@
-# Your robots die in silence
+# Control Tower - Multi-agent Monitoring
 
-[![tests](https://github.com/DEscalanteZ/tus-robots-mueren-en-silencio-es/actions/workflows/pruebas.yml/badge.svg)](https://github.com/DEscalanteZ/tus-robots-mueren-en-silencio-es/actions/workflows/pruebas.yml)
+[![tests](https://github.com/DEscalanteZ/torre-de-control-vigilancia-multiagente-es/actions/workflows/pruebas.yml/badge.svg)](https://github.com/DEscalanteZ/torre-de-control-vigilancia-multiagente-es/actions/workflows/pruebas.yml)
 
-**And if you sell automation maintenance to several clients, you'll be the last to find out.** This is
+**Your robots die in silence. And if you sell automation maintenance to several clients, you'll be the last to find out.** This is
 a control tower for agents, robots and watchdogs: a census of everything you have scheduled, one guard
 per client that checks what each robot *produced* (not that it ran), a separate tower that watches the
 guards, and a `Stop` hook for Claude Code that stops your agent when something scheduled has no entry
@@ -10,8 +10,8 @@ in the census. Just Python 3 (tested on 3.9, 3.12 and 3.14). Version 0.1. All co
 in Spanish.
 
 ```bash
-git clone https://github.com/DEscalanteZ/tus-robots-mueren-en-silencio-es
-cd tus-robots-mueren-en-silencio-es
+git clone https://github.com/DEscalanteZ/torre-de-control-vigilancia-multiagente-es
+cd torre-de-control-vigilancia-multiagente-es
 bash demo.sh          # one minute, made-up data, touches nothing of yours
 ```
 

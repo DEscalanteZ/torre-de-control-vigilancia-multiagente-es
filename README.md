@@ -1,20 +1,20 @@
-# Tus robots se mueren en silencio
+# Torre de Control - Vigilancia Multiagente
 
-**Y si vendes mantenimiento de automatizaciones a varios clientes, el último en enterarte vas a ser
-tú.** Esto es una torre de control para agentes, robots y vigías: un censo de todo lo que tienes
+**Tus robots se mueren en silencio. Y si vendes mantenimiento de automatizaciones a varios
+clientes, el último en enterarte vas a ser tú.** Esto es una torre de control para agentes, robots y vigías: un censo de todo lo que tienes
 programado, una guardia por cliente que comprueba lo que cada robot produjo (no que «corrió»), una
 torre aparte que vigila a las guardias, y un candado para Claude Code que frena a tu agente cuando
 aparece algo programado que nadie ha apuntado. Solo Python 3 (probado en 3.9, 3.12 y 3.14).
 
-[![pruebas](https://github.com/DEscalanteZ/tus-robots-mueren-en-silencio-es/actions/workflows/pruebas.yml/badge.svg)](https://github.com/DEscalanteZ/tus-robots-mueren-en-silencio-es/actions/workflows/pruebas.yml)
+[![pruebas](https://github.com/DEscalanteZ/torre-de-control-vigilancia-multiagente-es/actions/workflows/pruebas.yml/badge.svg)](https://github.com/DEscalanteZ/torre-de-control-vigilancia-multiagente-es/actions/workflows/pruebas.yml)
 
 > **Versión 0.1.** Funciona y está probado (ver [Cómo se ha probado](#cómo-se-ha-probado)), pero es joven. Si encuentras un fallo, o una frase que no se sostiene, **abre un aviso (issue)**.
 
 > 🇬🇧 **[English summary → README.en.md](README.en.md)**
 
 ```bash
-git clone https://github.com/DEscalanteZ/tus-robots-mueren-en-silencio-es
-cd tus-robots-mueren-en-silencio-es
+git clone https://github.com/DEscalanteZ/torre-de-control-vigilancia-multiagente-es
+cd torre-de-control-vigilancia-multiagente-es
 bash demo.sh          # un minuto, datos inventados, no toca nada tuyo
 ```
 
