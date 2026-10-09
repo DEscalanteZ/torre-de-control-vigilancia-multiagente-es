@@ -1,0 +1,34 @@
+name: pruebas
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prueba:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Prueba (datos inventados)
+        run: python herramientas/prueba.py
+      - name: Demo
+        run: bash demo.sh
+      - name: Roturas (la prueba de la prueba)
+        if: matrix.python == '3.12'
+        run: python herramientas/roturas.py
+  linux-de-verdad:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Herramientas del sistema
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq openssh-server rsync
+      - name: Prueba en Linux de verdad (cron, systemd, ssh con rrsync, Docker)
+        run: bash herramientas/prueba_linux.sh

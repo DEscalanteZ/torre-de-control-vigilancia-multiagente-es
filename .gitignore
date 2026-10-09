@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.tmp
+# lo tuyo no se sube: el censo y los partes llevan rutas y nombres de tu máquina
+censo.json
+censo.json.antes_*
+.guardia_estado_*.json
+partes/

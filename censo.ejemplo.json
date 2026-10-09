@@ -1,0 +1,168 @@
+{
+  "que_es": "El censo: todo lo que corre y debería seguir corriendo, con quién lo vigila. Lo que no está aquí no existe para la guardia, y nadie se entera si se cae.",
+  "regla": "Todo robot, automatización, agente, vigía, servicio, panel o máquina que se cree se da de alta aquí el mismo día. Lo que se apaga no se borra: se marca APAGADO.",
+  "guardias": [
+    "servidor",
+    "torre"
+  ],
+  "ignorar": [
+    "com.google.*",
+    "com.microsoft.*",
+    "com.adobe.*",
+    "us.zoom.*",
+    "com.dropbox.*"
+  ],
+  "piezas": [
+    {
+      "id": "copia-nocturna",
+      "nombre": "Copia de la base de datos al disco externo, cada noche a las 3:00",
+      "tipo": "tarea programada",
+      "maquina": "servidor",
+      "huella": "copia_nocturna.sh",
+      "estado": "VIGILADO",
+      "comprobar": [
+        {
+          "fichero": "/srv/copias/ultima.sql.gz",
+          "sla_horas": 26,
+          "min_bytes": 100000,
+          "debe_cambiar": true
+        }
+      ],
+      "depende_de": [],
+      "alta": "2026-10-01"
+    },
+    {
+      "id": "informe-ventas",
+      "nombre": "Baja las ventas del día de la tienda y deja el CSV que lee el panel",
+      "tipo": "tarea programada",
+      "maquina": "servidor",
+      "huella": "informe_ventas.py",
+      "estado": "VIGILADO",
+      "comprobar": [
+        {
+          "fichero": "/srv/informes/ventas_hoy.csv",
+          "sla_horas": 25,
+          "min_bytes": 200,
+          "contiene": "{hoy}"
+        }
+      ],
+      "depende_de": [
+        "llave-tienda"
+      ],
+      "alta": "2026-10-01"
+    },
+    {
+      "id": "web-tienda",
+      "nombre": "La web de la tienda",
+      "tipo": "web",
+      "estado": "VIGILADO",
+      "comprobar": [
+        {
+          "url": "https://mi-tienda.example/salud",
+          "espera": 200,
+          "contiene": "\"estado\": \"ok\""
+        }
+      ],
+      "depende_de": [],
+      "alta": "2026-10-01"
+    },
+    {
+      "id": "asistente-atencion",
+      "nombre": "El agente que contesta a los clientes por chat",
+      "tipo": "agente",
+      "maquina": "servidor",
+      "huella": "asistente-*",
+      "estado": "VIGILADO",
+      "comprobar": [
+        {
+          "contenedor": "asistente-atencion"
+        },
+        {
+          "url": "http://localhost:8080/salud",
+          "contiene": "\"estado\": \"ok\""
+        }
+      ],
+      "depende_de": [
+        "llave-modelo"
+      ],
+      "alta": "2026-10-02"
+    },
+    {
+      "id": "llave-tienda",
+      "nombre": "La llave de la API de la tienda que usa el informe de ventas (caduca)",
+      "tipo": "llave",
+      "estado": "SIN VIGILAR",
+      "depende_de": [],
+      "alta": "2026-10-01"
+    },
+    {
+      "id": "llave-modelo",
+      "nombre": "La llave del modelo de IA del asistente",
+      "tipo": "llave",
+      "estado": "VIGILADO",
+      "comprobar": [
+        {
+          "orden": "python3 /srv/vigias/saldo_modelo.py --minimo 5"
+        }
+      ],
+      "depende_de": [],
+      "alta": "2026-10-02"
+    },
+    {
+      "id": "guardia-servidor",
+      "nombre": "La guardia del servidor: cada hora comprueba lo de arriba y deja su parte",
+      "tipo": "vigía",
+      "maquina": "servidor",
+      "huella": "guardia.py",
+      "vigila_desde": "torre",
+      "estado": "VIGILADO",
+      "comprobar": [
+        {
+          "fichero": "/srv/torre/buzon/servidor/parte.txt",
+          "sla_horas": 3,
+          "min_bytes": 20,
+          "edad_por_contenido": true,
+          "no_contiene": "A CIEGAS",
+          "contiene": "guardia de «servidor»"
+        }
+      ],
+      "nota": "La comprobación la hace la torre (otra máquina: «vigila_desde»), sobre el parte que esta guardia le empuja: quien se vigila a sí mismo muere sin avisar. Por eso «torre» está en «guardias».",
+      "depende_de": [],
+      "alta": "2026-10-02"
+    },
+    {
+      "id": "envio-parte",
+      "nombre": "Empuja el parte de la guardia al buzón de la torre (rsync, cada hora)",
+      "tipo": "tarea programada",
+      "maquina": "servidor",
+      "huella": "/srv/partes/parte.txt",
+      "vigila_desde": "torre",
+      "estado": "VIGILADO",
+      "comprobar": [
+        {
+          "fichero": "/srv/torre/buzon/servidor/parte.txt",
+          "sla_horas": 3,
+          "min_bytes": 20,
+          "edad_por_contenido": true,
+          "contiene": "guardia de «servidor»"
+        }
+      ],
+      "nota": "Si el envío se para, el parte de la torre envejece: la misma comprobación cubre a la guardia y al envío.",
+      "depende_de": [
+        "guardia-servidor"
+      ],
+      "alta": "2026-10-02"
+    },
+    {
+      "id": "boletin-antiguo",
+      "nombre": "El boletín semanal por correo (sustituido por el del CRM)",
+      "tipo": "tarea programada",
+      "maquina": "servidor",
+      "huella": "boletin.py",
+      "estado": "APAGADO",
+      "depende_de": [],
+      "alta": "2026-06-10",
+      "baja": "2026-09-15"
+    }
+  ]
+}

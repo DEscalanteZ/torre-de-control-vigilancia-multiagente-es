@@ -1,0 +1,89 @@
+{
+  "que_es": "El censo de la TORRE: no vigila robots, vigila a las guardias. Cada máquina de cada cliente tiene su guardia, con su propio censo, y empuja aquí su parte a su propio buzón. La torre no tiene ninguna llave de ningún cliente: solo mira si cada parte llega, si es de hace poco, si viene de quien dice y si dice que está a ciegas. A la torre la vigila un servicio externo de hombre muerto (--latido), fuera de todas las máquinas.",
+  "guardias": [
+    "torre"
+  ],
+  "buzon": "/srv/torre/buzon",
+  "piezas": [
+    {
+      "id": "guardia-clinica",
+      "nombre": "La guardia de la clínica: manda su parte cada hora",
+      "tipo": "vigía",
+      "maquina": "clinica",
+      "vigila_desde": "torre",
+      "estado": "VIGILADO",
+      "comprobar": [
+        {
+          "fichero": "/srv/torre/buzon/clinica/parte.txt",
+          "sla_horas": 3,
+          "min_bytes": 20,
+          "edad_por_contenido": true,
+          "no_contiene": "A CIEGAS",
+          "contiene": "guardia de «clinica»"
+        }
+      ],
+      "depende_de": [],
+      "alta": "2026-10-09"
+    },
+    {
+      "id": "guardia-tienda-web",
+      "nombre": "La guardia de la tienda (máquina de la web): manda su parte cada hora",
+      "tipo": "vigía",
+      "maquina": "tienda-web",
+      "vigila_desde": "torre",
+      "estado": "VIGILADO",
+      "comprobar": [
+        {
+          "fichero": "/srv/torre/buzon/tienda-web/parte.txt",
+          "sla_horas": 3,
+          "min_bytes": 20,
+          "edad_por_contenido": true,
+          "no_contiene": "A CIEGAS",
+          "contiene": "guardia de «tienda-web»"
+        }
+      ],
+      "depende_de": [],
+      "alta": "2026-10-09"
+    },
+    {
+      "id": "guardia-tienda-datos",
+      "nombre": "La guardia de la tienda (máquina de la base de datos): manda su parte cada hora",
+      "tipo": "vigía",
+      "maquina": "tienda-datos",
+      "vigila_desde": "torre",
+      "estado": "VIGILADO",
+      "comprobar": [
+        {
+          "fichero": "/srv/torre/buzon/tienda-datos/parte.txt",
+          "sla_horas": 3,
+          "min_bytes": 20,
+          "edad_por_contenido": true,
+          "no_contiene": "A CIEGAS",
+          "contiene": "guardia de «tienda-datos»"
+        }
+      ],
+      "depende_de": [],
+      "alta": "2026-10-09"
+    },
+    {
+      "id": "guardia-despacho",
+      "nombre": "La guardia de el despacho: manda su parte cada hora",
+      "tipo": "vigía",
+      "maquina": "despacho",
+      "vigila_desde": "torre",
+      "estado": "VIGILADO",
+      "comprobar": [
+        {
+          "fichero": "/srv/torre/buzon/despacho/parte.txt",
+          "sla_horas": 3,
+          "min_bytes": 20,
+          "edad_por_contenido": true,
+          "no_contiene": "A CIEGAS",
+          "contiene": "guardia de «despacho»"
+        }
+      ],
+      "depende_de": [],
+      "alta": "2026-10-09"
+    }
+  ]
+}
