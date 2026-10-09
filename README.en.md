@@ -1,5 +1,7 @@
 # Your robots die in silence
 
+[![tests](https://github.com/DEscalanteZ/tus-robots-mueren-en-silencio-es/actions/workflows/pruebas.yml/badge.svg)](https://github.com/DEscalanteZ/tus-robots-mueren-en-silencio-es/actions/workflows/pruebas.yml)
+
 **And if you sell automation maintenance to several clients, you'll be the last to find out.** This is
 a control tower for agents, robots and watchdogs: a census of everything you have scheduled, one guard
 per client that checks what each robot *produced* (not that it ran), a separate tower that watches the
@@ -59,6 +61,9 @@ privileged piece of software from hitting everyone at once.
 - `herramientas/candado_alta.py` is a Claude Code `Stop` hook: it blocks once per session and per new
   unregistered piece, asks the agent to register it as unwatched and to propose a check, and tells the
   user if it breaks.
+- `herramientas/prueba_linux.sh` runs on a real Ubuntu machine in GitHub Actions on every change: real
+  cron, `/etc/cron.d`, systemd and Docker, plus a tower with an SSH key restricted by `rrsync -wo`
+  (the report arrives; writing to another client's folder, reading or opening a shell is refused).
 - `herramientas/prueba.py` (80 checks) and `herramientas/roturas.py` (breaks the code in 25 places
   and checks the test catches every one). `demo.sh` ends with a tower watching made-up clients: one
   healthy, one silent for seven hours, one blind and one new client nobody registered.

@@ -6,6 +6,8 @@ programado, una guardia por cliente que comprueba lo que cada robot produjo (no 
 torre aparte que vigila a las guardias, y un candado para Claude Code que frena a tu agente cuando
 aparece algo programado que nadie ha apuntado. Solo Python 3 (probado en 3.9, 3.12 y 3.14).
 
+[![pruebas](https://github.com/DEscalanteZ/tus-robots-mueren-en-silencio-es/actions/workflows/pruebas.yml/badge.svg)](https://github.com/DEscalanteZ/tus-robots-mueren-en-silencio-es/actions/workflows/pruebas.yml)
+
 > **Versión 0.1.** Funciona y está probado (ver [Cómo se ha probado](#cómo-se-ha-probado)), pero es joven. Si encuentras un fallo, o una frase que no se sostiene, **abre un aviso (issue)**.
 
 > 🇬🇧 **[English summary → README.en.md](README.en.md)**
@@ -212,8 +214,8 @@ sirva para eso, en la torre se pone así en el `~/.ssh/authorized_keys` del usua
 restrict,command="rrsync -wo /srv/torre/buzon/cliente-a" ssh-ed25519 AAAA… guardia-cliente-a
 ```
 
-`rrsync` es el guion de rsync para restringir llaves (según el sistema viene instalado o hay que
-copiarlo de la documentación de rsync). Con `-wo`, esa llave solo puede escribir en su buzón: ni leer,
+`rrsync` es el guion de rsync para restringir llaves (en Ubuntu viene con rsync, en `/usr/bin/rrsync`;
+en otros sistemas puede que haya que copiarlo de la documentación de rsync). Con `-wo`, esa llave solo puede escribir en su buzón: ni leer,
 ni salir de él, ni abrir una terminal. Probado: un intento de escribir en el buzón de otro cliente o de
 leer el parte se rechaza.
 
@@ -296,8 +298,14 @@ que cuando todo va bien. Por eso:
 - `demo.sh` monta una torre con clientes inventados: uno sano, uno cuya guardia lleva siete horas
   callada, uno cuya guardia está a ciegas y uno nuevo que manda partes sin que nadie lo haya apuntado
   en la torre. La torre da verde al primero y rojo a los otros tres.
-- La llave restringida del rsync, con `rrsync -wo` en una prueba simulada: el parte llega a su
-  buzón, y escribir en el de otro cliente o leer el parte se rechaza.
+- **En un Linux de verdad**, en cada cambio, con GitHub Actions (Ubuntu): `herramientas/prueba_linux.sh`
+  programa de verdad una línea de cron, un fichero de `/etc/cron.d`, una unidad de systemd con su
+  temporizador y contenedores de Docker (uno sano, uno con el chequeo de salud en rojo, uno parado), y
+  monta una torre con una llave ssh restringida con `rrsync -wo`. Comprueba que `descubrir.py` lo ve
+  todo sin copiar la orden del cron, que la guardia tumba los contenedores malos, que el parte llega
+  a su buzón con la línea de este README, y que con esa llave no se puede escribir en el buzón de otro
+  cliente, ni leer nada de la torre, ni abrir una terminal. Ahí corre también la prueba completa (con
+  Python 3.9 y 3.12), la demo y las 25 roturas. La insignia de arriba dice cómo fue la última vez.
 - `descubrir.py` sobre un Mac real con un censo vacío: encontró los 30 LaunchAgents activos del
   usuario en menos de 0,2 segundos, sin escribir nada.
 - El candado, dentro de un Claude Code de verdad en modo no interactivo, dos veces: se le pidió
@@ -333,9 +341,8 @@ que cuando todo va bien. Por eso:
   otros usuarios. En macOS, solo tus LaunchAgents, salvo que el censo diga `"launchd_sistema": true`.
 - Un contenedor que se cae y se levanta cada pocos minutos puede salir «en marcha» si se le mira en
   el momento bueno. Para eso, una comprobación de lo que produce.
-- Las fuentes de Linux (systemd, `/etc/cron.d`) y Docker se han probado con datos simulados, no en
-  un Linux con Docker de verdad. Si ejecutas la prueba como root, se saltan los dos casos de
-  permisos (a root no le frenan).
+- La prueba de Linux de verdad corre en Ubuntu; otras distribuciones no se han probado. Si ejecutas
+  `prueba.py` como root, se saltan los dos casos de permisos (a root no le frenan).
 - **El censo es código.** Una comprobación `orden` ejecuta lo que ponga ahí, con los permisos de
   quien corre la guardia, cada vez que corre. Trata el censo como un script: que solo lo pueda editar
   quien podría editar tus scripts, y mira las órdenes nuevas antes de aceptarlas (`--revisar` las
