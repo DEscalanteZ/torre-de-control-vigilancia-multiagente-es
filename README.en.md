@@ -51,8 +51,11 @@ None of the four was a monitoring failure. **All four were pieces that were neve
 robot isn't born monitored: it's born in some conversation, while solving something else, it works,
 it's taken for granted, and nobody looks at it again.
 
-Today my census has almost two hundred pieces across three companies. With ten robots you can keep
-it in your head. With two hundred, spread over several machines and several companies, nobody can.
+Today (October 2026) my census has **168 live pieces**: 47 robots, 41 watchdogs and guards, 26
+services, 11 dashboards, 6 AI agents, 18 keys and secrets and 19 more pieces (websites, backups,
+scheduled jobs...). They're spread across three companies, two servers, a Mac and several cloud
+services. 142 are watched; the other 26 aren't yet, and I keep them in plain sight as debt. With ten
+robots you can keep it in your head. With 168, nobody can.
 
 ## Where it really matters: when you maintain many clients
 

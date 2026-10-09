@@ -48,8 +48,11 @@ Ninguna de las cuatro fue un fallo de vigilancia. **Las cuatro eran piezas que n
 alta.** Un robot no nace vigilado: nace en una conversación cualquiera, resolviendo otra cosa,
 funciona, se da por hecho y nadie vuelve a mirarlo.
 
-Hoy mi censo tiene casi doscientas piezas de tres empresas. Con diez robots esto se lleva de cabeza.
-Con doscientos, repartidos por varias máquinas y varias empresas, no lo lleva nadie.
+Hoy (octubre de 2026) mi censo tiene **168 piezas vivas**: 47 robots, 41 vigías y guardias, 26
+servicios, 11 paneles, 6 agentes de IA, 18 llaves y secretos y 19 piezas más (webs, copias, tareas
+programadas...). Están repartidas entre tres empresas, dos servidores, un Mac y varios servicios en la
+nube. 142 están vigiladas; las otras 26 todavía no, y las tengo a la vista como deuda. Con diez robots
+esto se lleva de cabeza. Con 168, no lo lleva nadie.
 
 ## Dónde de verdad hace falta: cuando llevas el mantenimiento de muchos
 
